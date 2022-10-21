@@ -1,5 +1,5 @@
 # Twitter-Database-Model
-**A presumed model of Twitter's Database**
+**A presumed SQL model of Twitter's Database**
 
 **Twitter ERD**
 
