@@ -1,7 +1,8 @@
-## Twitter-Database-Model
-#A presumed model of Twitter's Database
+# Twitter-Database-Model
+**A presumed model of Twitter's Database**
 
-#Twitter ERD
+**Twitter ERD**
+
 Twitter has Users and Tweets. Each user needs to have a unique userHandle and an email but I am
 not using either of those as the Primary Key and instead have an arbitrary Integer userId as the
 Primary Key because lookups of integers have better performance than lookups on variable length
@@ -12,18 +13,18 @@ out the tweet. Each user can send out tweets 280 characters long and the tweet c
 picture, video or a combination of the three. The data that I have inserted into the tables only has
 tweets with a text body but there are columns that can hold picture and videos as well.
 
-#● Entities
+**● Entities**
 This initial analysis tells us that there’s going to be two strong entities. Users and Tweets. Each tweet
 would map to a user using the userId Foreign key.
 
-#User
+*User*
 
 User is a strong entity with userId as the Primary Key. There is no column dependency except on the
 Primary Key and there’s no redundancy in the table. So the table is in BCNF. User has a dependent
 weak entity - Followers table that keeps track of a user’s followers (Description in ERD diagram). This
 table has a composite Primary Key and has no column dependency. So this table is also in BCNF.
 
-#Tweet
+*Tweet*
 
 I have made two separate tables for Tweet - One that holds the tweet metadata and one that holds the
 tweet content (reason listed in the ERD diagram). These tables have a 1-1 relationship with tweetIds
@@ -38,27 +39,27 @@ and Replies. Detailed description for all the 4 are in the ERD diagram. Each of 
 composite primary keys and do not have any column dependency. So each of these 4 tables are in
 BCNF.
 
-#● Relationships
+**● Relationships**
 
-#User and Tweets
+*User and Tweets*
 
 Each tweet can be made by one and only one user (Maxima) and if there’s a tweet there needs to be
 a user that made the tweet (Minima). Each user can make Many tweets (Maxima) but does not need
 to make a tweet (Minima) So the relationship between User and Tweets is M(0)-1(1).
 
-#User and Followers
+*User and Followers*
 
 User and Followers have a One to Many relationship 1(1)-M(0) because a user need not have an
 entry in followers and can have multiple entries in followers. But an entry in followers can correspond
 to only one user and needs to correspond to at least one user.
 
-#Tweet and Tweet_content
+*Tweet and Tweet_content*
 
 Tweet and Tweet_content have a One to One relationship 1(1)-1(1). Each entry in tweet can
 correspond to only one entry in Tweet_content and needs to have a corresponding entry in
 Tweet_content.
 
-#Tweet and Views, Likes, Replies, Retweets
+*Tweet and Views, Likes, Replies, Retweets*
 
 The 4 sister tables Views, Likes, Replies, Retweets represent relationships between a user action on
 a tweet and the tweet and the tables are very similarly implemented. Separate descriptions for all the
@@ -69,7 +70,7 @@ Tweet and Views have a One to Many relationship 1(1)-M(0) because a Tweet need n
 in Views and can have multiple entries in Views. But an entry in Views can correspond to only one
 Tweet and needs to correspond to at least one Tweet.
 
-#Some Key Takeaways
+**Some Key Takeaways**
 
 In the first draft of the implementation, I had implemented a user’s Followers and the user’s Follows
 as text arrays in the User table itself and similarly, I had implemented Likes, Retweets, Replies and
